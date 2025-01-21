@@ -29,6 +29,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 
 import {useRef} from 'react';
+import { useScroll } from "@/context/scrollContext";
 
 const oswald = Oswald({ subsets: ['latin'] });
 
@@ -87,25 +88,27 @@ const scaleIn = {
   }
 };
 
+
 export default function MarathonPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const iframeRef = useRef();
+  const { sectionRef, scrollToSection } = useScroll();
 
-  const scrollToSection = () => {
-    if (iframeRef.current) {
-      const offsetTop = iframeRef.current.offsetTop - 100;
-      console.log(offsetTop);
+  // const scrollToSection = () => {
+  //   if (iframeRef.current) {
+  //     const offsetTop = iframeRef.current.offsetTop - 100;
+  //     console.log(offsetTop);
       
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth", // Enables smooth scrolling
-      });
-    }
-  };
+  //     window.scrollTo({
+  //       top: offsetTop,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar currentRoute="/marathon" scrollToSection={scrollToSection} />
+      <Navbar currentRoute="/marathon" />
 
       {/* Hero Section */}
       <motion.section 
@@ -418,7 +421,7 @@ export default function MarathonPage() {
         </div>
       </motion.section>
 
-      <div ref={iframeRef} className="w-full px-5 sm:px-24 md:px-0">
+      <div ref={sectionRef} className="w-full px-5 sm:px-24 md:px-0">
         <iframe src="https://konfhub.com/widget/runspire-marathon?desc=false&secondaryBg=F7F7F7&ticketBg=F7F7F7&borderCl=F7F7F7&bg=FFFFFF&fontColor=572148&ticketCl=572148&btnColor=fb5850&fontFamily=Prompt&borderRadius=10" id="konfhub-widget" title="Register for Runspire Marathon" width="100%" height="500"></iframe>
       </div>
 

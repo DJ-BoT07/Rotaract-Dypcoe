@@ -16,13 +16,17 @@ export const metadata = {
   description: "Rotaract Club of D.Y. Patil College of Engineering - Empowering Youth Through Service & Leadership",
 };
 
+import { ScrollProvider } from "@/context/scrollContext";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+      <ScrollProvider>
         {children}
+      </ScrollProvider>
       </body>
     </html>
   );

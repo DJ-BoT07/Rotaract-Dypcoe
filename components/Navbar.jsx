@@ -14,12 +14,15 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useScroll } from "@/context/scrollContext";
 
 const oswald = Oswald({ subsets: ['latin'] });
 
-export default function Navbar({ currentRoute,scrollToSection }) {
+export default function Navbar({ currentRoute }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [register,setRegister] = useState(false);
+  const { scrollToSection } = useScroll();
+
 
   const navItems = [
     { href: "/", icon: <HomeIcon className="w-5 h-5" />, label: "Home" },
