@@ -17,16 +17,21 @@ import { useState } from "react";
 
 const oswald = Oswald({ subsets: ['latin'] });
 
-export default function Navbar({ currentRoute }) {
+export default function Navbar({ currentRoute,scrollToSection }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [register,setRegister] = useState(false);
 
   const navItems = [
     { href: "/", icon: <HomeIcon className="w-5 h-5" />, label: "Home" },
     { href: "/#about", icon: <Info className="w-5 h-5" />, label: "About" },
   ];
 
-  const handleRegisterClick = () => {
-    window.location.href = "/marathon";
+  const handleRegisterClick = () => {    
+    if(window.location.href.split("/")[3] === "marathon") {
+      scrollToSection();
+    }else{
+      window.location.href = "/marathon";
+    }
   };
 
   return (
@@ -77,7 +82,7 @@ export default function Navbar({ currentRoute }) {
                 onClick={handleRegisterClick}
               >
                 Register Now for Marathon
-                <ExternalLink className="w-4 h-4" />
+                
               </Button>
             </div>
             {/* Mobile Menu Button */}
@@ -220,7 +225,7 @@ export default function Navbar({ currentRoute }) {
                     }}
                   >
                     Register Now for Marathon
-                    <ExternalLink className="w-4 h-4" />
+                    
                   </Button>
                 </div>
                 <motion.div 
