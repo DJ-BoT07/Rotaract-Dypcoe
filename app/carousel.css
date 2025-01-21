@@ -1,0 +1,26 @@
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  backface-visibility: hidden;
+}
+
+.embla__slide {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+/* Smooth transition for hover effects */
+.embla button {
+  transition: all 0.3s ease;
+}
+
+/* Hide buttons on mobile */
+@media (max-width: 640px) {
+  .embla button {
+    display: none;
+  }
+} 
