@@ -20,9 +20,13 @@ import {
   PersonStanding,
   MapPinCheck,
   Menu,
-  X
+  X,
+  Route,
+  Trophy
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 const oswald = Oswald({ subsets: ['latin'] });
 
@@ -45,12 +49,12 @@ const carouselImages = [
   {
     src: "/carousel-2.png",
     title: "Join Our Community",
-    description: "Make a Difference in Society"
+    description: "Make a Difference in Society by participating in community service, leadership development, and social initiatives. Together we can create positive change."
   },
   {
     src: "/carousel-3.png",
     title: "Marathon 2024",
-    description: "Run for a Cause - Register Now"
+    description: "Run for a Cause - Register Now for our annual charity marathon. Join hundreds of runners supporting education and youth empowerment. Every step makes a difference."
   }
 ];
 
@@ -218,195 +222,9 @@ const scaleIn = {
 };
 
 export default function Home() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation Bar */}
-      <motion.nav 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ 
-          type: "spring", 
-          stiffness: 50, 
-          damping: 20,
-          duration: 0.8
-        }}
-        className="fixed top-0 w-full bg-white/80 backdrop-blur-sm border-b z-[100] shadow-sm"
-      >
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 hover:opacity-90 transition-opacity">
-              <Image 
-                src="/logo_rotract.JPG" 
-                alt="Rotaract Logo" 
-                width={40} 
-                height={40}
-                className="rounded-full shadow-md md:w-[50px] md:h-[50px]"
-              />
-              <span className={`${oswald.className} text-lg md:text-xl font-bold text-amber-600`}>
-                Rotaract DYPCOE
-              </span>
-            </div>
-            <div className="hidden md:flex gap-8">
-              <a href="#home" className="text-gray-600 hover:text-amber-600 flex items-center gap-2 transition-colors">
-                <HomeIcon className="w-5 h-5" />
-                <span className="font-medium">Home</span>
-              </a>
-              <a href="#about" className="text-gray-600 hover:text-amber-600 flex items-center gap-2 transition-colors">
-                <Info className="w-5 h-5" />
-                <span className="font-medium">About</span>
-              </a>
-              <a href="#marathon" className="text-gray-600 hover:text-amber-600 flex items-center gap-2 transition-colors">
-                <PersonStanding className="w-5 h-5" />
-                <span className="font-medium">Marathon</span>
-              </a>
-            </div>
-            {/* Mobile Menu Button */}
-            <motion.button 
-              className="md:hidden p-2 text-gray-600 hover:text-amber-600 transition-colors relative z-50"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                initial={false}
-                animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
-                transition={{ duration: 0.4, ease: [0.6, -0.05, 0.01, 0.99] }}
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
-              </motion.div>
-            </motion.button>
-          </div>
-        </div>
-      </motion.nav>
-
-      {/* Mobile Menu Container - Moved outside nav */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div 
-            className="md:hidden fixed inset-0 z-[90]"
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={{
-              open: {
-                visibility: 'visible',
-                transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-              },
-              closed: {
-                visibility: 'hidden',
-                transition: { staggerChildren: 0.05, staggerDirection: -1 }
-              }
-            }}
-          >
-            {/* Mobile Menu Overlay */}
-            <motion.div 
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm"
-              variants={{
-                open: { opacity: 1 },
-                closed: { opacity: 0 }
-              }}
-              transition={{ duration: 0.5, ease: [0.6, -0.05, 0.01, 0.99] }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-
-            {/* Mobile Menu */}
-            <motion.div 
-              className="fixed right-0 top-0 h-full w-[280px] bg-white shadow-xl"
-              variants={{
-                open: { 
-                  x: 0,
-                  transition: {
-                    type: "spring",
-                    damping: 30,
-                    stiffness: 75,
-                    duration: 0.8
-                  }
-                },
-                closed: { 
-                  x: "100%",
-                  transition: {
-                    type: "spring",
-                    damping: 30,
-                    stiffness: 75,
-                    duration: 0.8
-                  }
-                }
-              }}
-            >
-              <div className="flex flex-col h-full pt-16">
-                <motion.div 
-                  className="flex items-center justify-between p-4 border-b"
-                  variants={{
-                    open: { opacity: 1, y: 0 },
-                    closed: { opacity: 0, y: 20 }
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <Image 
-                      src="/logo_rotract.JPG" 
-                      alt="Rotaract Logo" 
-                      width={40} 
-                      height={40}
-                      className="rounded-full shadow-sm"
-                    />
-                    <span className={`${oswald.className} text-lg font-bold text-amber-600`}>
-                      Rotaract DYPCOE
-                    </span>
-                  </div>
-                </motion.div>
-                <div className="flex flex-col gap-2 p-4">
-                  {[
-                    { href: '#home', icon: <HomeIcon className="w-5 h-5" />, label: 'Home' },
-                    { href: '#about', icon: <Info className="w-5 h-5" />, label: 'About' },
-                    { href: '#marathon', icon: <PersonStanding className="w-5 h-5" />, label: 'Marathon' }
-                  ].map((item, index) => (
-                    <motion.a 
-                      key={item.href}
-                      href={item.href}
-                      className="text-gray-600 hover:text-amber-600 flex items-center gap-3 p-3 rounded-lg hover:bg-amber-50 transition-all"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      variants={{
-                        open: { 
-                          opacity: 1, 
-                          x: 0,
-                          transition: { delay: 0.2 + index * 0.1 }
-                        },
-                        closed: { 
-                          opacity: 0, 
-                          x: 20 
-                        }
-                      }}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      {item.icon}
-                      <span className="font-medium">{item.label}</span>
-                    </motion.a>
-                  ))}
-                </div>
-                <motion.div 
-                  className="mt-auto p-4 border-t"
-                  variants={{
-                    open: { opacity: 1, y: 0 },
-                    closed: { opacity: 0, y: 20 }
-                  }}
-                >
-                  <p className="text-sm text-gray-500 text-center">
-                    © 2024 Rotaract Club of DYPCOE
-                  </p>
-                </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Navbar currentRoute="/" />
 
       {/* Hero Section with Custom Carousel */}
       <motion.section 
@@ -439,10 +257,10 @@ export default function Home() {
               className="relative h-[300px] md:h-[600px] w-full group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-400 rounded-2xl -rotate-6 scale-95 opacity-20 group-hover:rotate-0 group-hover:scale-100 transition-transform duration-300"></div>
-              <Image
+            <Image
                 src="/TEAM.png"
-                alt="Rotaract Team"
-                fill
+              alt="Rotaract Team"
+              fill
                 className="object-cover rounded-2xl shadow-xl group-hover:scale-[1.02] transition-transform duration-300"
               />
             </motion.div>
@@ -457,14 +275,14 @@ export default function Home() {
                 </h2>
                 <div className="space-y-4 md:space-y-6">
                   <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-                    Rotaract DYPCOE is a dynamic community of young leaders at D.Y. Patil College of Engineering, 
-                    dedicated to making a positive impact through service and leadership. As part of Rotary International's 
-                    global network, we focus on professional development, community service, and international understanding.
-                  </p>
+              Rotaract DYPCOE is a dynamic community of young leaders at D.Y. Patil College of Engineering, 
+              dedicated to making a positive impact through service and leadership. As part of Rotary International's 
+              global network, we focus on professional development, community service, and international understanding.
+            </p>
                   <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-                    Our club organizes various initiatives including educational programs, health camps, and environmental 
-                    projects, providing members with opportunities to develop leadership skills while serving the community.
-                  </p>
+              Our club organizes various initiatives including educational programs, health camps, and environmental 
+              projects, providing members with opportunities to develop leadership skills while serving the community.
+            </p>
                 </div>
                 <div className="pt-6 md:pt-8">
                   <Button 
@@ -512,9 +330,9 @@ export default function Home() {
               </h2>
             </div>
             <p className="text-gray-600 text-base md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
-              Be part of our annual marathon event promoting health and community wellness. 
-              This year's marathon features multiple categories and an exciting route through the city.
-            </p>
+                Be part of our annual marathon event promoting health and community wellness. 
+                This year's marathon features multiple categories and an exciting route through the city.
+              </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto px-4">
               <div className="bg-white/70 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all">
                 <div className="flex items-center gap-3 text-base md:text-lg">
@@ -533,15 +351,15 @@ export default function Home() {
                   <MapPin className="w-6 md:w-8 h-6 md:h-8 text-amber-600" />
                   <span className="font-medium">D. Y. Patil School</span>
                 </div>
+                </div>
               </div>
-            </div>
-            <Button 
+              <Button 
               className="w-full md:w-auto bg-amber-600 hover:bg-amber-700 flex items-center justify-center gap-2 text-base md:text-lg py-4 md:py-6 px-8 md:px-12 mx-auto rounded-xl shadow-lg hover:shadow-xl transition-all"
-              onClick={() => window.open('https://marathon-registration.com', '_blank')}
-            >
-              Register Now
+                onClick={() => window.open('https://marathon-registration.com', '_blank')}
+              >
+                Register Now
               <ExternalLink className="w-4 md:w-5 h-4 md:h-5" />
-            </Button>
+              </Button>
           </motion.div>
 
           {/* Maps Grid */}
@@ -683,7 +501,7 @@ export default function Home() {
                 <p className={`${oswald.className} text-lg md:text-xl font-semibold text-center mt-4 text-amber-600`}>
                   Rotaract Pradhikaran
                 </p>
-              </div>
+            </div>
               <div className="group">
                 <motion.div 
                   variants={scaleIn}
@@ -696,13 +514,13 @@ export default function Home() {
                   }}
                   className="relative w-full h-[200px] md:w-[300px] md:h-[300px] bg-white/70 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 duration-300"
                 >
-                  <Image
+              <Image
                     src="/satej.png"
                     alt="SATEJ Logo"
-                    fill
+                fill
                     className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
                     priority
-                  />
+              />
                 </motion.div>
                 <p className={`${oswald.className} text-lg md:text-xl font-semibold text-center mt-4 text-amber-600`}>
                   SATEJ
@@ -716,7 +534,7 @@ export default function Home() {
               <p className="text-lg md:text-xl text-gray-600">
                 Service Above Self
               </p>
-            </div>
+          </div>
           </motion.div>
         </div>
       </motion.section>
