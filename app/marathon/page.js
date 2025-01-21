@@ -75,6 +75,17 @@ const staggerContainer = {
   }
 };
 
+const scaleIn = {
+  initial: { scale: 0.9 },
+  animate: { 
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  }
+};
+
 export default function MarathonPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -364,6 +375,128 @@ export default function MarathonPage() {
                 </div>
               </motion.div>
             ))}
+
+            {/* 10K Map */}
+            <motion.div 
+              variants={scaleIn}
+              whileHover={{ 
+                scale: 1.02,
+                transition: {
+                  duration: 0.4,
+                  ease: "easeOut"
+                }
+              }}
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-amber-100 rounded-xl">
+                  <Trophy className="w-6 h-6 text-amber-600" />
+                </div>
+                <div>
+                  <h3 className={`${oswald.className} text-xl font-semibold`}>Prize Pool</h3>
+                  <p className="text-gray-600">₹1,00,000</p>
+                  <p className="text-gray-600">Medals & Certificates</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Partners Section */}
+      <motion.section 
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+        className="py-20 bg-gradient-to-b from-white via-amber-50/30 to-white relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div 
+            variants={fadeIn}
+            className="flex flex-col items-center justify-center gap-12 md:gap-20"
+          >
+            <motion.h2 
+              variants={scaleIn}
+              className={`${oswald.className} text-3xl md:text-5xl font-bold text-amber-600 bg-white/50 backdrop-blur-sm px-8 md:px-12 py-4 md:py-6 rounded-2xl shadow-sm text-center`}
+            >
+              Event Partners
+            </motion.h2>
+            <div className="grid grid-cols-1 md:flex md:flex-wrap items-center justify-center gap-8 md:gap-16">
+              <div className="group">
+                <motion.div 
+                  variants={scaleIn}
+                  whileHover={{ 
+                    scale: 1.03,
+                    transition: {
+                      duration: 0.4,
+                      ease: "easeOut"
+                    }
+                  }}
+                  className="relative w-full h-[200px] md:w-[300px] md:h-[300px] bg-white/70 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 duration-300"
+                >
+                  <Image
+                    src="/logo_rotract.JPG"
+                    alt="Rotaract DYPCOE Logo"
+                    fill
+                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                    priority
+                  />
+                </motion.div>
+                <p className={`${oswald.className} text-lg md:text-xl font-semibold text-center mt-4 text-amber-600`}>
+                  Rotaract DYPCOE
+                </p>
+              </div>
+              <div className="group">
+                <motion.div 
+                  variants={scaleIn}
+                  whileHover={{ 
+                    scale: 1.03,
+                    transition: {
+                      duration: 0.4,
+                      ease: "easeOut"
+                    }
+                  }}
+                  className="relative w-full h-[200px] md:w-[300px] md:h-[300px] bg-white/70 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 duration-300"
+                >
+                  <Image
+                    src="/pradhikaran.png"
+                    alt="Rotaract Pradhikaran Logo"
+                    fill
+                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                    priority
+                  />
+                </motion.div>
+                <p className={`${oswald.className} text-lg md:text-xl font-semibold text-center mt-4 text-amber-600`}>
+                  Rotaract Pradhikaran
+                </p>
+              </div>
+              <div className="group">
+                <motion.div 
+                  variants={scaleIn}
+                  whileHover={{ 
+                    scale: 1.03,
+                    transition: {
+                      duration: 0.4,
+                      ease: "easeOut"
+                    }
+                  }}
+                  className="relative w-full h-[200px] md:w-[300px] md:h-[300px] bg-white/70 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 duration-300"
+                >
+                  <Image
+                    src="/satej.png"
+                    alt="SATEJ Logo"
+                    fill
+                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                    priority
+                  />
+                </motion.div>
+                <p className={`${oswald.className} text-lg md:text-xl font-semibold text-center mt-4 text-amber-600`}>
+                  SATEJ
+                </p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </motion.section>
@@ -371,30 +504,14 @@ export default function MarathonPage() {
       {/* Footer */}
       <motion.footer 
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="bg-gradient-to-b from-white to-amber-50 border-t py-12"
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-gradient-to-b from-white to-amber-50 border-t py-8 md:py-12"
       >
         <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center justify-center gap-6 text-center">
-            <div className="space-y-4">
-              <h2 className={`${oswald.className} text-2xl md:text-3xl font-bold text-amber-600`}>
-                Join Us for Marathon 2024
-              </h2>
-              <p className="text-gray-600 max-w-xl mx-auto">
-                Be part of this incredible journey. Register now and experience the thrill of running through the scenic routes of Pimpri-Chinchwad.
-              </p>
-            </div>
-            <Button 
-              className="bg-amber-600 hover:bg-amber-700 text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-              onClick={() => window.open('https://marathon-registration.com', '_blank')}
-            >
-              Register Now
-              <ExternalLink className="w-5 h-5 ml-2" />
-            </Button>
-            <p className="text-gray-500 flex items-center gap-2">
-              <Heart className="w-4 h-4 text-amber-600" />
-              © 2024 Rotaract Club of DYPCOE
+          <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
+            <p className="flex items-center justify-center gap-2 text-gray-600 text-center px-4">
+              <Heart className="w-4 md:w-5 h-4 md:h-5 text-amber-600 animate-pulse" />
+              © 2024 Rotaract Club of DYPCOE. All rights reserved.
             </p>
           </div>
         </div>
