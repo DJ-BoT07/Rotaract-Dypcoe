@@ -23,8 +23,11 @@ export default function Navbar({ currentRoute }) {
   const navItems = [
     { href: "/", icon: <HomeIcon className="w-5 h-5" />, label: "Home" },
     { href: "/#about", icon: <Info className="w-5 h-5" />, label: "About" },
-    { href: "/marathon", icon: <PersonStanding className="w-5 h-5" />, label: "Marathon" }
   ];
+
+  const handleRegisterClick = () => {
+    window.location.href = "/marathon";
+  };
 
   return (
     <>
@@ -71,9 +74,9 @@ export default function Navbar({ currentRoute }) {
               ))}
               <Button 
                 className="bg-amber-600 hover:bg-amber-700 text-white gap-2 ml-4 shadow-md hover:shadow-lg transition-all"
-                onClick={() => window.open('https://marathon-registration.com', '_blank')}
+                onClick={handleRegisterClick}
               >
-                Register Now
+                Register Now for Marathon
                 <ExternalLink className="w-4 h-4" />
               </Button>
             </div>
@@ -212,11 +215,11 @@ export default function Navbar({ currentRoute }) {
                   <Button 
                     className="bg-amber-600 hover:bg-amber-700 text-white gap-2 mt-2 shadow-md hover:shadow-lg transition-all"
                     onClick={() => {
-                      window.open('https://marathon-registration.com', '_blank');
+                      handleRegisterClick();
                       setIsMobileMenuOpen(false);
                     }}
                   >
-                    Register Now
+                    Register Now for Marathon
                     <ExternalLink className="w-4 h-4" />
                   </Button>
                 </div>
