@@ -258,10 +258,10 @@ export default function Home() {
               className="relative h-[300px] md:h-[600px] w-full group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-400 rounded-2xl -rotate-6 scale-95 opacity-20 group-hover:rotate-0 group-hover:scale-100 transition-transform duration-300"></div>
-            <Image
-                src="/rotaract2.jpg"
-              alt="Rotaract Team"
-              fill
+              <Image
+                src="/Rotaract2.jpg"
+                alt="Rotaract Team"
+                fill
                 className="object-cover rounded-2xl shadow-xl group-hover:scale-[1.02] transition-transform duration-300"
               />
             </motion.div>
