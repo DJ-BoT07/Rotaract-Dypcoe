@@ -85,7 +85,7 @@ export default function Navbar({ currentRoute }) {
                 onClick={handleRegisterClick}
               >
                 Register Now for Marathon
-                
+                <ExternalLink className="w-4 h-4" />
               </Button>
             </div>
             {/* Mobile Menu Button */}
