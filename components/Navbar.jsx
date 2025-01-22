@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Oswald } from 'next/font/google';
 import Image from "next/image";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { 
   Home as HomeIcon,
   Info,
@@ -22,23 +23,31 @@ const oswald = Oswald({ subsets: ['latin'] });
 
 export default function Navbar({ currentRoute }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [register,setRegister] = useState(false);
+  const [register, setRegister] = useState(false);
   const { scrollToSection } = useScroll();
+  const router = useRouter();
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = async (e, href) => {
     e.preventDefault();
     
     // Extract the path and hash from href
     const [path, hash] = href.split('#');
     
-    // If we're not on the home page and trying to navigate to a section
-    if (window.location.pathname !== '/' && hash) {
-      window.location.href = href;
+    // If we're on the marathon page and trying to navigate to a section
+    if (window.location.pathname === '/marathon' && hash) {
+      await router.push('/');
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          setIsMobileMenuOpen(false);
+        }
+      }, 100);
       return;
     }
 
     // If we're on the home page and there's a hash, scroll to section
-    if (hash) {
+    if (window.location.pathname === '/' && hash) {
       const element = document.getElementById(hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
@@ -46,7 +55,7 @@ export default function Navbar({ currentRoute }) {
       }
     } else {
       // If no hash (like home link), just navigate
-      window.location.href = href;
+      router.push(href);
     }
   };
 
@@ -57,12 +66,13 @@ export default function Navbar({ currentRoute }) {
     { href: "#contact", icon: <Phone className="w-5 h-5" />, label: "Contact" },
   ];
 
-  const handleRegisterClick = () => {    
-    if(window.location.href.split("/")[3] === "marathon") {
+  const handleRegisterClick = async () => {    
+    if (window.location.pathname === '/marathon') {
       scrollToSection();
-    }else{
-      window.location.href = "/marathon";
+    } else {
+      await router.push('/marathon');
     }
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -251,10 +261,7 @@ export default function Navbar({ currentRoute }) {
                   ))}
                   <Button 
                     className="bg-amber-600 hover:bg-amber-700 text-white gap-2 mt-2 shadow-md hover:shadow-lg transition-all"
-                    onClick={() => {
-                      handleRegisterClick();
-                      setIsMobileMenuOpen(false);
-                    }}
+                    onClick={handleRegisterClick}
                   >
                     Register Now for Marathon
                   </Button>
