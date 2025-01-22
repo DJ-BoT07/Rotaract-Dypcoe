@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Oswald } from 'next/font/google';
 import dynamic from 'next/dynamic';
+import Rot2  from "@/public/Rot2.png"
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -259,7 +260,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-400 rounded-2xl -rotate-6 scale-95 opacity-20 group-hover:rotate-0 group-hover:scale-100 transition-transform duration-300"></div>
               <Image
-                src="/Rotaract2.jpg"
+                src={Rot2}
                 alt="Rotaract Team"
                 fill
                 className="object-cover rounded-2xl shadow-xl group-hover:scale-[1.02] transition-transform duration-300"
