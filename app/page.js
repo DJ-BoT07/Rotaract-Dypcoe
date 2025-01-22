@@ -27,6 +27,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import EventCard from "@/components/EventCard";
 
 const oswald = Oswald({ subsets: ['latin'] });
 
@@ -258,7 +259,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-400 rounded-2xl -rotate-6 scale-95 opacity-20 group-hover:rotate-0 group-hover:scale-100 transition-transform duration-300"></div>
             <Image
-                src="/TEAM.png"
+                src="/logo_rotract.jpg"
               alt="Rotaract Team"
               fill
                 className="object-cover rounded-2xl shadow-xl group-hover:scale-[1.02] transition-transform duration-300"
@@ -306,19 +307,161 @@ export default function Home() {
         </div>
       </motion.section>
 
+      {/* Event Gallery */}
+      <motion.section
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+        className="py-20 px-4 bg-gradient-to-b from-white via-amber-50/30 to-white relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"></div>
+        <div className="container mx-auto relative z-10">
+          <motion.h2 
+            variants={fadeIn}
+            className={`${oswald.className} text-3xl md:text-5xl font-bold text-center text-amber-600 mb-12 md:mb-16`}
+          >
+            Recent Events
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-7xl mx-auto">
+            <EventCard 
+              title="Rotaract Eye Checkup Camp"
+              images={[
+                '/eye_camp/img1.jpg',
+                '/eye_camp/img2.jpg',
+                '/eye_camp/img3.jpg',
+                '/eye_camp/img4.jpg',
+                '/eye_camp/img5.jpg',
+                '/eye_camp/img6.jpg',
+                '/eye_camp/img7.jpg',
+                '/eye_camp/img8.jpg',
+                '/eye_camp/img9.jpg',
+                '/eye_camp/img10.jpg',
+                '/eye_camp/img11.jpg'
+              ]}
+              description="A comprehensive eye health initiative providing free eye checkups and consultations to the community, promoting better vision care and awareness."
+            />
+
+            <EventCard 
+              title="Rotaract River Cleaning Camp"
+              images={[
+                '/river_cleaning/img1.jpg',
+                '/river_cleaning/img2.jpg',
+                '/river_cleaning/img3.jpg',
+                '/river_cleaning/img4.jpg',
+                '/river_cleaning/img5.jpg',
+                '/river_cleaning/img6.jpg',
+              ]}
+              description="An environmental conservation initiative where our team worked together to clean and protect our local river ecosystem, promoting environmental awareness."
+            />
+          </div>
+        </div>
+      </motion.section>
+
       {/* Footer */}
       <motion.footer 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="bg-gradient-to-b from-white to-amber-50 border-t py-8 md:py-12"
+        className="bg-gradient-to-b from-white to-amber-50 border-t py-12 md:py-16"
       >
         <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
-            <p className="flex items-center justify-center gap-2 text-gray-600 text-center px-4">
-              <Heart className="w-4 md:w-5 h-4 md:h-5 text-amber-600 animate-pulse" />
-              © 2024 Rotaract Club of DYPCOE. All rights reserved.
-            </p>
+          <div className="flex flex-col items-center justify-center gap-8 md:gap-12">
+            {/* Contact Information */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 w-full max-w-4xl">
+              <div className="text-center space-y-2">
+                <h4 className={`${oswald.className} text-lg font-semibold text-amber-600`}>
+                  President 2024-25
+                </h4>
+                <p className="font-medium">Rtn. Suhas Dhamale</p>
+                <p className="text-gray-600">Rotary Club of Nigdi, Pune</p>
+                <a 
+                  href="tel:+919881461001" 
+                  className="text-amber-600 hover:text-amber-700 transition-colors"
+                >
+                  +91 9881461001
+                </a>
+              </div>
+
+              <div className="text-center space-y-2">
+                <h4 className={`${oswald.className} text-lg font-semibold text-amber-600`}>
+                  Director of Runathon 2024-25
+                </h4>
+                <p className="font-medium">Rtn. Keshav Manage</p>
+                <a 
+                  href="tel:+919422522911" 
+                  className="text-amber-600 hover:text-amber-700 transition-colors"
+                >
+                  +91 9422522911
+                </a>
+              </div>
+
+              <div className="text-center space-y-2">
+                <h4 className={`${oswald.className} text-lg font-semibold text-amber-600`}>
+                  Co-Director of Runathon 2024-25
+                </h4>
+                <p className="font-medium">Rtn. Shashank Phadke</p>
+                <a 
+                  href="tel:+919823029488" 
+                  className="text-amber-600 hover:text-amber-700 transition-colors"
+                >
+                  +91 9823029488
+                </a>
+              </div>
+            </div>
+
+            {/* Social Media */}
+            <div className="flex items-center gap-4">
+              <a 
+                href="https://www.facebook.com/rotaractdypcoe" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-amber-600 transition-colors"
+                aria-label="Facebook"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 24 24" 
+                  fill="currentColor" 
+                  className="w-6 h-6"
+                >
+                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+                </svg>
+              </a>
+              <a 
+                href="https://www.instagram.com/rotaract_dypcoe/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-amber-600 transition-colors"
+                aria-label="Instagram"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 24 24" 
+                  fill="currentColor" 
+                  className="w-6 h-6"
+                >
+                  <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.508-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.247-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.247 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z"/>
+                </svg>
+              </a>
+            </div>
+
+            {/* Copyright */}
+            <div className="flex flex-col items-center gap-2 text-center">
+              <p className="flex items-center justify-center gap-2 text-gray-600">
+                <Heart className="w-4 md:w-5 h-4 md:h-5 text-amber-600 animate-pulse" />
+                © 2024 Rotaract Club of DYPCOE. All rights reserved.
+              </p>
+              <a 
+                href="https://www.instagram.com/rotaract_dypcoe/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-amber-600 hover:text-amber-700 transition-colors"
+              >
+                @rotaract_dypcoe
+              </a>
+            </div>
           </div>
         </div>
       </motion.footer>

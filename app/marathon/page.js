@@ -22,7 +22,9 @@ import {
   Info,
   PersonStanding,
   Menu,
-  X
+  X,
+  Facebook,
+  Instagram
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -94,18 +96,6 @@ export default function MarathonPage() {
   const iframeRef = useRef();
   const { sectionRef, scrollToSection } = useScroll();
 
-  // const scrollToSection = () => {
-  //   if (iframeRef.current) {
-  //     const offsetTop = iframeRef.current.offsetTop - 100;
-  //     console.log(offsetTop);
-      
-  //     window.scrollTo({
-  //       top: offsetTop,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // };
-
   return (
     <div className="min-h-screen bg-white">
       <Navbar currentRoute="/marathon" />
@@ -115,10 +105,10 @@ export default function MarathonPage() {
         initial="initial"
         animate="animate"
         variants={staggerContainer}
-        className="relative min-h-screen bg-gradient-to-br from-amber-600 via-amber-500 to-amber-600 overflow-hidden"
+        className="relative min-h-screen bg-gradient-to-br from-amber-700 to-amber-900 overflow-hidden"
       >
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20"></div>
         
         {/* Background Image */}
         <div className="absolute inset-0">
@@ -126,20 +116,20 @@ export default function MarathonPage() {
             src="/marathon-hero.jpg"
             alt="Marathon Background"
             fill
-            className="object-cover mix-blend-overlay opacity-40"
+            className="object-cover mix-blend-overlay opacity-30"
             priority
           />
         </div>
         
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
         
         {/* Content */}
-        <div className="container mx-auto px-4 h-full relative z-10 pt-16">
+        <div className="container mx-auto px-4 h-full relative z-10">
           {/* Navigation */}
           <motion.div
             variants={fadeIn}
-            className="pt-6 md:pt-8 flex justify-between items-center"
+            className="pt-8 md:pt-12 flex justify-between items-center" // Reduced top padding
           >
             <Link href="/">
               <motion.div
@@ -153,78 +143,98 @@ export default function MarathonPage() {
             </Link>
           </motion.div>
           
-          {/* Hero Content */}
-          <motion.div 
-            variants={fadeIn}
-            className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)] text-center text-white px-4 py-8 md:py-0"
-          >
-            {/* Event Date Badge */}
+          {/* Hero Content with Side-by-Side Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center h-[calc(100vh-6rem)] py-8 md:py-12">
+            {/* Marathon Logo */}
             <motion.div
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="bg-white/10 backdrop-blur-sm px-4 md:px-6 py-2 rounded-full mb-6 md:mb-8 flex items-center gap-2 md:gap-3 text-sm md:text-base"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="w-full h-[280px] md:h-[450px] relative order-1 md:order-none flex items-center justify-center"
             >
-              <Calendar className="w-4 h-4 md:w-5 md:h-5 text-amber-300" />
-              <span className="text-amber-100">March 15, 2024</span>
+              <div className="relative w-[280px] md:w-[450px] h-[280px] md:h-[450px]">
+                <Image
+                  src="/marathon.png"
+                  alt="Marathon 2024 Logo"
+                  fill
+                  className="object-contain drop-shadow-2xl"
+                  priority
+                />
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full -z-10"></div>
+              </div>
             </motion.div>
 
-            {/* Title */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="space-y-4 md:space-y-6 mb-8 md:mb-12"
+            {/* Content Side */}
+            <motion.div 
+              variants={fadeIn}
+              className="flex flex-col items-center md:items-start text-center md:text-left text-white order-2 md:order-none"
             >
-              <h1 className={`${oswald.className} text-4xl sm:text-5xl md:text-8xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-amber-100 to-white px-2`}>
-                Marathon 2024
-              </h1>
-              <p className="text-lg sm:text-xl md:text-3xl text-amber-100 max-w-3xl mx-auto leading-relaxed px-2">
-                Join us for an unforgettable running experience through the heart of Pimpri-Chinchwad
-              </p>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-12 mb-8 md:mb-12 w-full max-w-4xl mx-auto px-2"
-            >
-              {[
-                { icon: <Route className="w-5 h-5 md:w-6 md:h-6" />, label: "3 Routes", value: "3K, 5K, 10K" },
-                { icon: <Users className="w-5 h-5 md:w-6 md:h-6" />, label: "Participants", value: "1000+" },
-                { icon: <Trophy className="w-5 h-5 md:w-6 md:h-6" />, label: "Prize Pool", value: "₹1,00,000" },
-                { icon: <MapPin className="w-5 h-5 md:w-6 md:h-6" />, label: "Location", value: "DYPCOE" }
-              ].map((stat, index) => (
-                <div key={index} className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-3 md:p-4">
-                  <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 rounded-xl w-fit mx-auto mb-2 md:mb-3">
-                    {stat.icon}
-                  </div>
-                  <div className="text-amber-200 font-medium text-sm md:text-base">{stat.label}</div>
-                  <div className="text-white text-base md:text-xl font-semibold">{stat.value}</div>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center w-full sm:w-auto px-4"
-            >
-              <Button 
-                className="bg-white text-amber-600 hover:bg-white/90 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
-                // onClick={() => window.open('https://marathon-registration.com', '_blank')}
-                onClick={scrollToSection}
+              {/* Event Date Badge */}
+              <motion.div
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="bg-white/10 backdrop-blur-sm px-4 md:px-6 py-2 rounded-full mb-6 md:mb-8 flex items-center gap-2 md:gap-3 text-sm md:text-base"
               >
-                Register Now
-                
-              </Button>
-           
+                <Calendar className="w-4 h-4 md:w-5 md:h-5 text-amber-300" />
+                <span className="text-amber-100">March 15, 2024</span>
+              </motion.div>
+
+              {/* Title */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="space-y-4 md:space-y-6 mb-8 md:mb-12"
+              >
+                <h1 className={`${oswald.className} text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-white to-amber-200`}>
+                  Marathon 2024
+                </h1>
+                <p className="text-lg sm:text-xl md:text-2xl text-amber-100/90 max-w-2xl leading-relaxed">
+                  Join us for an unforgettable running experience through the heart of Pimpri-Chinchwad
+                </p>
+              </motion.div>
+
+              {/* Stats */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="grid grid-cols-2 gap-4 w-full max-w-lg mb-8"
+              >
+                {[
+                  { icon: <Route className="w-5 h-5 md:w-6 md:h-6" />, label: "3 Routes", value: "3K, 5K, 10K" },
+                  { icon: <Users className="w-5 h-5 md:w-6 md:h-6" />, label: "Participants", value: "1000+" },
+                  { icon: <Trophy className="w-5 h-5 md:w-6 md:h-6" />, label: "Prize Pool", value: "₹1,00,000" },
+                  { icon: <MapPin className="w-5 h-5 md:w-6 md:h-6" />, label: "Location", value: "DYPCOE" }
+                ].map((stat, index) => (
+                  <div key={index} className="text-center md:text-left bg-white/10 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-white/10 hover:border-amber-500/30 transition-colors">
+                    <div className="bg-amber-500/10 p-2 md:p-3 rounded-xl w-fit mx-auto md:mx-0 mb-2 md:mb-3">
+                      {stat.icon}
+                    </div>
+                    <div className="text-amber-200 font-medium text-sm md:text-base">{stat.label}</div>
+                    <div className="text-white text-base md:text-xl font-semibold">{stat.value}</div>
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* CTA Button */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="w-full sm:w-auto"
+              >
+                <Button 
+                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-base md:text-lg px-8 md:px-10 py-5 md:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+                  onClick={scrollToSection}
+                >
+                  Register Now
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Decorative Elements */}
@@ -524,18 +534,71 @@ export default function MarathonPage() {
       </motion.section>
 
       {/* Footer */}
-      <motion.footer 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-b from-white to-amber-50 border-t py-8 md:py-12"
+      <motion.footer
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+        className="bg-gradient-to-b from-amber-50 to-white relative overflow-hidden"
       >
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
-            <p className="flex items-center justify-center gap-2 text-gray-600 text-center px-4">
-              <Heart className="w-4 md:w-5 h-4 md:h-5 text-amber-600 animate-pulse" />
-              © 2024 Rotaract Club of DYPCOE. All rights reserved.
-            </p>
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"></div>
+        
+        <div className="container mx-auto px-4 py-12 md:py-16 relative">
+          {/* Contact Information */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {/* President */}
+            <motion.div variants={fadeIn} className="text-center">
+              <h3 className={`${oswald.className} text-xl font-semibold mb-2`}>President 2024-25</h3>
+              <p className="text-gray-600 mb-1">Rtn. Suhas Dhamale</p>
+              <p className="text-amber-600 font-medium">+91 9876543210</p>
+            </motion.div>
+            
+            {/* Director */}
+            <motion.div variants={fadeIn} className="text-center">
+              <h3 className={`${oswald.className} text-xl font-semibold mb-2`}>Director of Runathon 2024-25</h3>
+              <p className="text-gray-600 mb-1">Rtn. Keshav Manage</p>
+              <p className="text-amber-600 font-medium">+91 9876543210</p>
+            </motion.div>
+            
+            {/* Co-Director */}
+            <motion.div variants={fadeIn} className="text-center">
+              <h3 className={`${oswald.className} text-xl font-semibold mb-2`}>Co-Director of Runathon 2024-25</h3>
+              <p className="text-gray-600 mb-1">Rtn. Shashank Phadke</p>
+              <p className="text-amber-600 font-medium">+91 9876543210</p>
+            </motion.div>
           </div>
+
+          {/* Social Links */}
+          <motion.div variants={fadeIn} className="flex justify-center gap-6 mb-8">
+            <Link 
+              href="https://facebook.com"
+              target="_blank"
+              className="bg-white p-3 rounded-full shadow-md hover:shadow-lg transition-all hover:-translate-y-1"
+            >
+              <Facebook className="w-6 h-6 text-blue-600" />
+            </Link>
+            <Link 
+              href="https://instagram.com"
+              target="_blank"
+              className="bg-white p-3 rounded-full shadow-md hover:shadow-lg transition-all hover:-translate-y-1"
+            >
+              <Instagram className="w-6 h-6 text-pink-600" />
+            </Link>
+          </motion.div>
+
+          {/* Copyright */}
+          <motion.div variants={fadeIn} className="text-center text-gray-600">
+            <p className="flex items-center justify-center gap-1">
+              Made with <Heart className="w-4 h-4 text-red-500" /> by{" "}
+              <Link
+                href="https://instagram.com/rotaract_dypcoe"
+                target="_blank"
+                className="text-amber-600 hover:text-amber-700 font-medium"
+              >
+                @rotaract_dypcoe
+              </Link>
+            </p>
+          </motion.div>
         </div>
       </motion.footer>
     </div>
