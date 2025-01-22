@@ -10,7 +10,9 @@ import {
   PersonStanding,
   Menu,
   X,
-  ExternalLink
+  ExternalLink,
+  Calendar,
+  Phone
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -23,10 +25,36 @@ export default function Navbar({ currentRoute }) {
   const [register,setRegister] = useState(false);
   const { scrollToSection } = useScroll();
 
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    
+    // Extract the path and hash from href
+    const [path, hash] = href.split('#');
+    
+    // If we're not on the home page and trying to navigate to a section
+    if (window.location.pathname !== '/' && hash) {
+      window.location.href = href;
+      return;
+    }
+
+    // If we're on the home page and there's a hash, scroll to section
+    if (hash) {
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setIsMobileMenuOpen(false);
+      }
+    } else {
+      // If no hash (like home link), just navigate
+      window.location.href = href;
+    }
+  };
 
   const navItems = [
     { href: "/", icon: <HomeIcon className="w-5 h-5" />, label: "Home" },
-    { href: "/#about", icon: <Info className="w-5 h-5" />, label: "About" },
+    { href: "#about", icon: <Info className="w-5 h-5" />, label: "About" },
+    { href: "#events", icon: <Calendar className="w-5 h-5" />, label: "Events" },
+    { href: "#contact", icon: <Phone className="w-5 h-5" />, label: "Contact" },
   ];
 
   const handleRegisterClick = () => {    
@@ -67,9 +95,10 @@ export default function Navbar({ currentRoute }) {
             </Link>
             <div className="hidden md:flex gap-8 items-center">
               {navItems.map((item) => (
-                <Link 
+                <a 
                   key={item.href} 
-                  href={item.href} 
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className={`flex items-center gap-2 transition-colors ${
                     currentRoute === item.href 
                       ? 'text-amber-600' 
@@ -78,7 +107,7 @@ export default function Navbar({ currentRoute }) {
                 >
                   {item.icon}
                   <span className="font-medium">{item.label}</span>
-                </Link>
+                </a>
               ))}
               <Button 
                 className="bg-amber-600 hover:bg-amber-700 text-white gap-2 ml-4 shadow-md hover:shadow-lg transition-all"
@@ -189,15 +218,15 @@ export default function Navbar({ currentRoute }) {
                 </motion.div>
                 <div className="flex flex-col gap-2 p-4">
                   {navItems.map((item, index) => (
-                    <Link 
+                    <a 
                       key={item.href}
                       href={item.href}
+                      onClick={(e) => handleNavClick(e, item.href)}
                       className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
                         currentRoute === item.href
                           ? 'text-amber-600 bg-amber-50'
                           : 'text-gray-600 hover:text-amber-600 hover:bg-amber-50'
                       }`}
-                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <motion.div
                         variants={{
@@ -218,7 +247,7 @@ export default function Navbar({ currentRoute }) {
                         {item.icon}
                         <span className="font-medium">{item.label}</span>
                       </motion.div>
-                    </Link>
+                    </a>
                   ))}
                   <Button 
                     className="bg-amber-600 hover:bg-amber-700 text-white gap-2 mt-2 shadow-md hover:shadow-lg transition-all"
@@ -228,7 +257,6 @@ export default function Navbar({ currentRoute }) {
                     }}
                   >
                     Register Now for Marathon
-                    
                   </Button>
                 </div>
                 <motion.div 

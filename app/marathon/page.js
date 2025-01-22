@@ -105,7 +105,7 @@ export default function MarathonPage() {
         initial="initial"
         animate="animate"
         variants={staggerContainer}
-        className="relative min-h-screen bg-gradient-to-br from-amber-700 to-amber-900 overflow-hidden"
+        className="relative min-h-screen bg-gradient-to-br from-amber-700 to-amber-900"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20"></div>
@@ -124,12 +124,12 @@ export default function MarathonPage() {
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
         
-        {/* Content */}
-        <div className="container mx-auto px-4 h-full relative z-10">
+        {/* Content Container */}
+        <div className="container mx-auto relative z-10 h-screen flex flex-col">
           {/* Navigation */}
           <motion.div
             variants={fadeIn}
-            className="pt-8 md:pt-12 flex justify-between items-center" // Reduced top padding
+            className="pt-24 flex justify-between items-center"
           >
             <Link href="/">
               <motion.div
@@ -143,102 +143,103 @@ export default function MarathonPage() {
             </Link>
           </motion.div>
           
-          {/* Hero Content with Side-by-Side Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center h-[calc(100vh-6rem)] py-8 md:py-12">
-            {/* Marathon Logo */}
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="w-full h-[280px] md:h-[450px] relative order-1 md:order-none flex items-center justify-center"
-            >
-              <div className="relative w-[280px] md:w-[450px] h-[280px] md:h-[450px]">
-                <Image
-                  src="/marathon.png"
-                  alt="Marathon 2024 Logo"
-                  fill
-                  className="object-contain drop-shadow-2xl"
-                  priority
-                />
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full -z-10"></div>
-              </div>
-            </motion.div>
-
-            {/* Content Side */}
-            <motion.div 
-              variants={fadeIn}
-              className="flex flex-col items-center md:items-start text-center md:text-left text-white order-2 md:order-none"
-            >
-              {/* Event Date Badge */}
+          {/* Main Content */}
+          <div className="flex-1 flex items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center w-full">
+              {/* Left Side - Logo */}
               <motion.div
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="bg-white/10 backdrop-blur-sm px-4 md:px-6 py-2 rounded-full mb-6 md:mb-8 flex items-center gap-2 md:gap-3 text-sm md:text-base"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="flex justify-center items-center"
               >
-                <Calendar className="w-4 h-4 md:w-5 md:h-5 text-amber-300" />
-                <span className="text-amber-100">March 15, 2024</span>
+                <div className="relative w-[250px] h-[250px] md:w-[400px] md:h-[400px]">
+                  <Image
+                    src="/marathon.png"
+                    alt="Marathon 2024 Logo"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority
+                  />
+                  {/* Glow Effect */}
+                  <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full -z-10"></div>
+                </div>
               </motion.div>
 
-              {/* Title */}
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="space-y-4 md:space-y-6 mb-8 md:mb-12"
+              {/* Right Side - Content */}
+              <motion.div 
+                variants={fadeIn}
+                className="flex flex-col items-center md:items-start text-center md:text-left text-white"
               >
-                <h1 className={`${oswald.className} text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-white to-amber-200`}>
-                  Marathon 2024
-                </h1>
-                <p className="text-lg sm:text-xl md:text-2xl text-amber-100/90 max-w-2xl leading-relaxed">
-                  Join us for an unforgettable running experience through the heart of Pimpri-Chinchwad
-                </p>
-              </motion.div>
-
-              {/* Stats */}
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="grid grid-cols-2 gap-4 w-full max-w-lg mb-8"
-              >
-                {[
-                  { icon: <Route className="w-5 h-5 md:w-6 md:h-6" />, label: "3 Routes", value: "3K, 5K, 10K" },
-                  { icon: <Users className="w-5 h-5 md:w-6 md:h-6" />, label: "Participants", value: "1000+" },
-                  { icon: <Trophy className="w-5 h-5 md:w-6 md:h-6" />, label: "Prize Pool", value: "₹1,00,000" },
-                  { icon: <MapPin className="w-5 h-5 md:w-6 md:h-6" />, label: "Location", value: "DYPCOE" }
-                ].map((stat, index) => (
-                  <div key={index} className="text-center md:text-left bg-white/10 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-white/10 hover:border-amber-500/30 transition-colors">
-                    <div className="bg-amber-500/10 p-2 md:p-3 rounded-xl w-fit mx-auto md:mx-0 mb-2 md:mb-3">
-                      {stat.icon}
-                    </div>
-                    <div className="text-amber-200 font-medium text-sm md:text-base">{stat.label}</div>
-                    <div className="text-white text-base md:text-xl font-semibold">{stat.value}</div>
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* CTA Button */}
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1 }}
-                className="w-full sm:w-auto"
-              >
-                <Button 
-                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-base md:text-lg px-8 md:px-10 py-5 md:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
-                  onClick={scrollToSection}
+                {/* Event Date Badge */}
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 flex items-center gap-2"
                 >
-                  Register Now
-                </Button>
+                  <Calendar className="w-4 h-4 text-amber-300" />
+                  <span className="text-amber-100">March 15, 2024</span>
+                </motion.div>
+
+                {/* Title and Description */}
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="space-y-4 mb-8"
+                >
+                  <h1 className={`${oswald.className} text-4xl md:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-white to-amber-200`}>
+                    Marathon 2024
+                  </h1>
+                  <p className="text-lg md:text-xl text-amber-100/90 max-w-xl">
+                    Join us for an unforgettable running experience through the heart of Pimpri-Chinchwad
+                  </p>
+                </motion.div>
+
+                {/* Stats Grid */}
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                  className="grid grid-cols-2 gap-4 w-full max-w-lg mb-8"
+                >
+                  {[
+                    { icon: <Route className="w-5 h-5" />, label: "3 Routes", value: "3K, 5K, 10K" },
+                    { icon: <Users className="w-5 h-5" />, label: "Participants", value: "1000+" },
+                    { icon: <Trophy className="w-5 h-5" />, label: "Prize Pool", value: "₹1,00,000" },
+                    { icon: <MapPin className="w-5 h-5" />, label: "Location", value: "DYPCOE" }
+                  ].map((stat, index) => (
+                    <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-amber-500/30 transition-colors">
+                      <div className="bg-amber-500/10 p-2 rounded-xl w-fit mb-2">
+                        {stat.icon}
+                      </div>
+                      <div className="text-amber-200 text-sm font-medium">{stat.label}</div>
+                      <div className="text-white text-base font-semibold">{stat.value}</div>
+                    </div>
+                  ))}
+                </motion.div>
+
+                {/* CTA Button */}
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 1 }}
+                >
+                  <Button 
+                    className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all"
+                    onClick={scrollToSection}
+                  >
+                    Register Now
+                  </Button>
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
           </div>
         </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-t from-white to-transparent"></div>
+        {/* Bottom Gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
       </motion.section>
 
       {/* Event Details */}

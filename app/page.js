@@ -259,7 +259,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-400 rounded-2xl -rotate-6 scale-95 opacity-20 group-hover:rotate-0 group-hover:scale-100 transition-transform duration-300"></div>
             <Image
-                src="/logo_rotract.jpg"
+                src="/rotaract2.jpg"
               alt="Rotaract Team"
               fill
                 className="object-cover rounded-2xl shadow-xl group-hover:scale-[1.02] transition-transform duration-300"
@@ -314,6 +314,7 @@ export default function Home() {
         viewport={{ once: true }}
         variants={staggerContainer}
         className="py-20 px-4 bg-gradient-to-b from-white via-amber-50/30 to-white relative overflow-hidden"
+        id="events"
       >
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"></div>
         <div className="container mx-auto relative z-10">
@@ -369,7 +370,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center gap-8 md:gap-12">
             {/* Contact Information */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 w-full max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 w-full max-w-4xl" id="contact">
               <div className="text-center space-y-2">
                 <h4 className={`${oswald.className} text-lg font-semibold text-amber-600`}>
                   President 2024-25
