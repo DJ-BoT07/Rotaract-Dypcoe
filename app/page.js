@@ -276,7 +276,7 @@ export default function Home() {
                 <div className="space-y-4 md:space-y-6">
                   <p className="text-gray-600 text-base md:text-lg leading-relaxed">
               Rotaract DYPCOE is a dynamic community of young leaders at D.Y. Patil College of Engineering, 
-              dedicated to making a positive impact through service and leadership. As part of Rotary International's 
+              dedicated to making a positive impact through service and leadership. As part of Rotary International&apos;s 
               global network, we focus on professional development, community service, and international understanding.
             </p>
                   <p className="text-gray-600 text-base md:text-lg leading-relaxed">

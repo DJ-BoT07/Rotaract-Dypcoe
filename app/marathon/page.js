@@ -9,7 +9,6 @@ import {
   Calendar,
   Medal,
   MapPin,
-  ExternalLink,
   MapPinCheck,
   ArrowLeft,
   Clock,
@@ -28,6 +27,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
+
+import {useRef} from 'react';
+import { useScroll } from "@/context/scrollContext";
 
 const oswald = Oswald({ subsets: ['latin'] });
 
@@ -86,8 +88,23 @@ const scaleIn = {
   }
 };
 
+
 export default function MarathonPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const iframeRef = useRef();
+  const { sectionRef, scrollToSection } = useScroll();
+
+  // const scrollToSection = () => {
+  //   if (iframeRef.current) {
+  //     const offsetTop = iframeRef.current.offsetTop - 100;
+  //     console.log(offsetTop);
+      
+  //     window.scrollTo({
+  //       top: offsetTop,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-white">
@@ -199,10 +216,11 @@ export default function MarathonPage() {
             >
               <Button 
                 className="bg-white text-amber-600 hover:bg-white/90 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
-                onClick={() => window.open('https://marathon-registration.com', '_blank')}
+                // onClick={() => window.open('https://marathon-registration.com', '_blank')}
+                onClick={scrollToSection}
               >
                 Register Now
-                <ExternalLink className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                
               </Button>
            
             </motion.div>
@@ -377,7 +395,7 @@ export default function MarathonPage() {
             ))}
 
             {/* 10K Map */}
-            <motion.div 
+            {/* <motion.div 
               variants={scaleIn}
               whileHover={{ 
                 scale: 1.02,
@@ -398,10 +416,14 @@ export default function MarathonPage() {
                   <p className="text-gray-600">Medals & Certificates</p>
                 </div>
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </div>
       </motion.section>
+
+      <div ref={sectionRef} className="w-full px-5 sm:px-24 md:px-0">
+        <iframe src="https://konfhub.com/widget/runspire-marathon?desc=false&secondaryBg=F7F7F7&ticketBg=F7F7F7&borderCl=F7F7F7&bg=FFFFFF&fontColor=572148&ticketCl=572148&btnColor=fb5850&fontFamily=Prompt&borderRadius=10" id="konfhub-widget" title="Register for Runspire Marathon" width="100%" height="500"></iframe>
+      </div>
 
       {/* Partners Section */}
       <motion.section 
